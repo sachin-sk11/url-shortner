@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .formcontainer{
+            display: flex;
+            flex-direction: column;  
+            width: 250px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL shoetner</title>
+</head>
+<body>
+    <h1>URL shortner</h1>
+    <h3>
+        hey, this is a website to shorten the url 
+    </h3>
+    <div>
+        <form class="formcontainer" method="POST" action="/url">
+            <label for="url">Enter Your Url</label><br>
+            <input type="text" name="url" placeholder="https://example.com"><br>
+            <button type="submit">Generate</button>
+        </form>
+    </div>
+    <div>
+        <% if (locals.id) { %>
+         <p>shortned URL<a href="http://localhost:3000/url/<%= id %>" target="_blank">http://localhost:3000/url/<%= id %></a> </p>
+        <% } %>
+    </div>
+    <div>
+        <% if (locals.urls) { %>
+         <table>
+            <thead>
+                <th>S.no</th>
+                <th>shortURL</th>
+                <th>redirectURL</th>
+                <th>clicks</th>
+            </thead>
+            <tbody>
+                <% urls.forEach((url,index) => { %>
+                 <tr>
+                    <td><%= index+1 %></td>
+                 <td><%= url.shortId %></td>
+                 <td><%= url.redirectURL %></td>
+                 <td><%= url.visitHistory.length %></td>
+                 </tr>
+                <% } )%>
+            </tbody>
+         </table>
+        <% } %>
+    </div>
+</body>
+</html>
